@@ -1,10 +1,6 @@
 from flask import render_template, redirect
 from routes import *
 from server import app
-id = 0
-def get_unique_id():
-    id += 1
-    return id
 
 class Discount_post():
     def __init__(self, data_dict):
