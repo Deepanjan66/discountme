@@ -20,21 +20,16 @@ class PostManager:
         data = [row for row in data if name in row['name']]
         data = [Discount_post(row) for row in data]
         return data
-    """
+
     def category_search(category):
-        postList = []
-        with open('something.csv') as csvfile:
-            reader = csv.reader(csvfile, delimiter = "?")
-            for row in reader:
-                if row[4] == category:
-                    postList.append(??)
-        return postList
+        data = dao.read(POSTS)
+        data = [row for row in data if name in row['category']]
+        data = [Discount_post(row) for row in data]
+        return data
+
     def get_all_posts():
-        postList = []
-        with open('something.csv') as csvfile:
-            reader = csv.reader(csvfile, delimiter ="?")
-            for row in reader:
-                postList.append(??)
-        return postList"""
+        data = dao.read(POSTS)
+        data = [Discount_post(row) for row in data]
+        return data
 
 
