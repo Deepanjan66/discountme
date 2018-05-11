@@ -19,11 +19,6 @@ def feed():
     post_list = PostManager.get_all_posts()
     return render_template("feed.html", posts=post_list)
 
-@app.route('/dashboard')
-def dashboard():
-    categories = []
-    return render_template("dashboard.html", categories=categories)
-
 @app.route('/post', methods = ['POST', 'GET'])
 def post():
     if request.method == 'POST':
@@ -32,7 +27,7 @@ def post():
     return render_template('post.html')
 
 @app.route('/profile/<id>')
-def profile(id):
+def dashboard(id):
     id = int(id)
     posts = PostManager.get_posts_by_user(id)
     return render_template("profile.html",username=UserManager.get_user_by_id(id).name, posts = posts)
