@@ -1,5 +1,4 @@
 from flask import render_template, redirect
-from routes import *
 from server import app
 
 class Discount_post():
@@ -29,3 +28,10 @@ class Discount_post():
     def get_id(self):
         return get_unique_id()
     
+
+class User():
+    def __init__(self, user_dict):
+        self.id = user_dict['id']
+        self.name = user_dict['name']
+        self.location = user_dict['location']
+        self.password = user_dict['password']
