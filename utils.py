@@ -1,4 +1,4 @@
-from post import Discount_post
+from models import Discount_post
 from server import dao
 from config import *
 import csv
@@ -30,6 +30,7 @@ class PostManager:
     def get_all_posts():
         data = dao.read(POSTS)
         data = [Discount_post(row) for row in data]
+        print(data)
         return data
 
 

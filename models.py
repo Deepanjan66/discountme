@@ -6,8 +6,8 @@ class Discount_post():
     def __init__(self, data_dict):
         self.name = data_dict['name']
         self.id = data_dict['id']
-        self.original = data_dict['original_price']
-        self.discount = data_dict['current_price']
+        self.original_price = data_dict['original_price']
+        self.current_price = data_dict['current_price']
         self.location = data_dict['location']
         self.category = data_dict['category']
 

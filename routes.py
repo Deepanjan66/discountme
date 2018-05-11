@@ -5,7 +5,7 @@ from utils import *
 
 @app.route('/')
 def discount_feed():
-    return render_template("index.html")
+    return render_template("all.html")
 
 @app.route('/discount_post')
 def discount_post():
@@ -17,9 +17,10 @@ def discount_post():
 @app.route('/feed')
 def feed():
     post_list = PostManager.get_all_posts()
-    return render_template("feed.html", posts=post_list)
+    print(post_list)
+    return render_template("index.html", posts=post_list)
 
-@app.route('dashboard')
+@app.route('/dashboard')
 def dashboard():
     categories = []
     return render_template("dashboard.html", categories=categories)
