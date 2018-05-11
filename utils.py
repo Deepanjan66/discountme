@@ -1,7 +1,21 @@
-from models import Discount_post
+from models import *
 from server import dao
 from config import *
-import csv
+
+class UserManager:
+    def add_user(user_form):
+        # count curr user number
+        uid = len(dao.read(USERS)) + 1
+        user_form['id'] = uid
+        dao.write(USERS, [user_form])
+
+    def get_user_by_id(id):
+        user_dict = next(filter(lambda u:int(u['id']) == id, dao.read(USERS)))
+        return User(user_dict)
+
+    def get_users():
+        return [ User(user_dict) for user_dict in dao.read(USERS) ]
+
 
 class PostManager:
     def add_post(data_dict):
