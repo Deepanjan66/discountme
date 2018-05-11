@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request
+from flask import *
 import csv
 from server import app
 from utils import *
@@ -19,10 +19,16 @@ def feed():
     post_list = PostManager.get_all_posts()
     return render_template("feed.html", posts=post_list)
 
-@app.route('dashboard')
+@app.route('/dashboard')
 def dashboard():
     categories = []
     return render_template("dashboard.html", categories=categories)
 
 
 
+'''
+Serve static files
+'''
+@app.route('/static/<path:path>')
+def static_file(path):
+    return send_from_directory('static', path)
