@@ -9,6 +9,7 @@ import json
 def discount_feed():
     return render_template("test.html")
 
+
 @app.route('/discount_post', methods=["POST"])
 def discount_post():
     if request.method == 'POST':
