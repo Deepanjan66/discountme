@@ -1,0 +1,53 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+
+<script type="text/javascript">
+// setup some JSON to use
+
+window.onload = function() {
+   // setup the button click
+   doWork();
+}
+
+function doWork() {
+      // ajax the JSON to the server
+      $.post("locs", function(data){
+         var infowindow = new google.maps.InfoWindow({});
+         data = JSON.parse(data);
+         var myOptions = {center: new google.maps.LatLng((-33.868968) - 0.001, 151.20664 + 0.001),
+             zoom: 12,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+         };
+         var size = parseInt(data['size']);
+         var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+         var marker, i;
+
+         for (i = 0; i < size; i++) {
+            marker = new google.maps.Marker({
+               position: new google.maps.LatLng(data[i][0], data[i][1]),
+               map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+               return function () {
+                  infowindow.setContent(data[i][2]);
+                  infowindow.open(map, marker);
+               }
+            })(marker, i));
+         }
+      });
+
+      // stop link reloading the page
+       //event.preventDefault();
+}
+</script>
+<script type="text/javascript"
+        src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDg02uDO1ClnNq6h8nqx6Fx_nX8WPUog_s&callback=doWork" async>
+</script>
+<!--<body onload="initialize()">-->
+<body>
+   <div id="map_canvas" style="width:60%; height:60%"></div>
+</body>
+</html>
