@@ -13,10 +13,15 @@ def discount_post():
     return render_template("discount_post.html")
 
 @app.route('/')
-@app.route('/feed')
-def feed():
-    post_list = PostManager.get_all_posts()
-    return render_template("index.html", posts=post_list)
+@app.route('/feed', defaults={'category': 'all'})
+@app.route('/feed/<category>', )
+def feed(category):
+    post_list = PostManager.category_search(category)
+    all_category = [entry.category for entry in PostManager.get_all_posts()]
+    all_category = list(set(all_category))
+    # print(post_list)
+    return render_template("feed.html", posts=post_list, 
+            all_category=all_category, curr_category=category)
 
 @app.route('/new_user', methods=["POST"])
 def new_user():
