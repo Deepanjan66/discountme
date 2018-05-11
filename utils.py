@@ -81,4 +81,5 @@ class LocationManager:
 
 class CategoryManager:
     def get_categories_by_id(id):
+        pass
 
