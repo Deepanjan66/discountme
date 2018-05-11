@@ -8,7 +8,7 @@ import json
 @app.route('/discount_post', methods=["POST"])
 def discount_post():
     if request.method == 'POST':
-        PostManager.add_post(dict(request.form))
+        PostManager.add_post(dict(request.form), file=request.files['file'])
         return redirect(url_for('dashboard.html'))
     return render_template("discount_post.html")
 
@@ -55,6 +55,12 @@ def dashboard(id):
     id = int(id)
     posts = PostManager.get_posts_by_user(id)
     return render_template("profile.html",username=UserManager.get_user_by_id(id).name, posts = posts)
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    filename += ".jpg"
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                                           filename)
 
 
 '''

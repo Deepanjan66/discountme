@@ -1,5 +1,5 @@
 from models import *
-from server import dao
+from server import dao, app
 from config import *
 import requests
 
@@ -19,9 +19,12 @@ class UserManager:
 
 
 class PostManager:
-    def add_post(data_dict):
+    def add_post(data_dict, uploaded_file=None):
         all_posts = dao.read(POSTS)
         data_dict['id'] = len(all_posts)
+        if file is not None:
+            filename = data_dict['id'] + ".jpg"
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         dao.write(POSTS, [data_dict], mode="a")
 
 
