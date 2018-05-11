@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request
+from flask import *
 import csv
 from server import app
 from utils import *
@@ -7,7 +7,7 @@ import json
 
 @app.route('/')
 def discount_feed():
-    return render_template("test.html")
+    return render_template("map.html")
 
 
 @app.route('/discount_post', methods=["POST"])
@@ -20,7 +20,6 @@ def discount_post():
 @app.route('/feed')
 def feed():
     post_list = PostManager.get_all_posts()
-    print(post_list)
     return render_template("index.html", posts=post_list)
 
 @app.route('/new_user', methods=["POST"])
@@ -55,10 +54,26 @@ def locations():
     return json.dumps(data)
 
 
-@app.route('/dashboard')
-def dashboard():
-    categories = []
-    return render_template("dashboard.html", categories=categories)
+@app.route('/post', methods = ['POST', 'GET'])
+def post():
+    if request.method == 'POST':
+        PostManager.add_post(request.form.to_dict())
+        return redirect(url_for('feed'))
+    return render_template('post.html')
 
+@app.route('/profile/<id>')
+def dashboard(id):
+    id = int(id)
+    posts = PostManager.get_posts_by_user(id)
+    return render_template("profile.html",username=UserManager.get_user_by_id(id).name, posts = posts)
 
+@app.route('/explore')
+def explore():
+    pass
 
+'''
+Serve static files
+'''
+@app.route('/static/<path:path>')
+def static_file(path):
+    return send_from_directory('static', path)
