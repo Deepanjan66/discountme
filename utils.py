@@ -38,7 +38,7 @@ class PostManager:
 
     def category_search(category):
         data = dao.read(POSTS)
-        data = [row for row in data if name in row['category']]
+        data = [row for row in data if category == row['category'] or category == 'all']
         data = [Discount_post(row) for row in data]
         return data
 

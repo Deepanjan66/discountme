@@ -16,6 +16,16 @@
     <div class="container">
 
       <div class="row">
+         <div class="col-lg-6 justify-content" style="margin: 0 auto 50px auto">
+             <nav class="nav nav-pills flex-column flex-sm-row">
+             <a class="flex-sm-fill text-sm-center nav-link {%if curr_category == 'all'%}active{%endif%}" href="/feed">All</a>
+  {% for category in all_category %}
+  <a class="flex-sm-fill text-sm-center nav-link {%if curr_category == category%}active{%endif%}" href="/feed/{{category}}">{{category}}</a>
+  {% endfor %}
+</nav>
+         </div> 
+      </div>
+      <div class="row">
         {% for post in posts %}
         <div class="col-md-4">
           <div class="card mb-4 box-shadow">
@@ -25,8 +35,8 @@
               <span style="font-weight: bold" class="float-right card-text">{{post.category}}</span>
               
               <p class="card-text">Current Price: 
-                  <small class="text-mute" style="text-decoration: line-through">${{post.original}}</small>
-                  ${{post.discount}}
+                  <small class="text-mute" style="text-decoration: line-through">${{post.original_price}}</small>
+                  ${{post.current_price}}
               </p>
               <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{post.location}}</p> 
             </div>
