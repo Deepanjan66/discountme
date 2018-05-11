@@ -1,6 +1,7 @@
 from models import *
 from server import dao
 from config import *
+import requests
 
 class UserManager:
     def add_user(user_form):
@@ -44,6 +45,7 @@ class PostManager:
     def get_all_posts():
         data = dao.read(POSTS)
         data = [Discount_post(row) for row in data]
+        print(data)
         return data
 
     def get_post_by_id(id):
@@ -55,3 +57,24 @@ class PostManager:
         post_ids = [int(row['post_id']) for row in user_posts if int(row['uid']) == id]
         post_objs = list(map(PostManager.get_post_by_id, post_ids))
         return post_objs 
+
+class LocationManager:
+    def get_latitudes(locs):
+        all_lats = []
+
+        for loc in locs:
+            response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=\"'\
+            +loc+'\"&key=AIzaSyDg02uDO1ClnNq6h8nqx6Fx_nX8WPUog_s')
+
+            resp_json_payload = response.json()
+            try:
+                response = resp_json_payload['results'][0]['geometry']['location']
+                if response is None:
+                    all_lats.append(None)
+                    continue
+            except:
+                all_lats.append(None)
+                continue
+            all_lats.append(response)
+            
+        return all_lats

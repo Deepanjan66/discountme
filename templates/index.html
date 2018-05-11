@@ -168,4 +168,14 @@
 <script src="/static/popper.min.js"></script>
 <script src="/static/bootstrap.min.js"></script>
 <script src="/static/holder.min.js"></script>
+{% for post in posts %}
+<div class="card" style="width:400px">
+        <img class="card-img-top" src="img_avatar1.png" alt="Card image">
+        <div class="card-body">
+          <h4 class="card-title">{{ post.name }}</h4>
+          <p class="card-text">Current Price : {{ post.current_price }}</p>
+          <a href="#" class="btn btn-primary">Nothing</a>
+        </div>
+</div>
+{% endfor %}
 {% endblock %}
