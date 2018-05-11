@@ -10,19 +10,19 @@ def discount_feed():
 @app.route('/discount_post')
 def discount_post():
     if request.method == 'POST':
-        name = request.form["name"]
-        original = request.form["original_price"]
-        discount = request.form["discount_price"]
-        location = reuqest.form["location"]
-        category = request.form["category"]
         PostManager.add_post(dict(request.form))
         return redirect(url_for('dashboard.html'))
     return render_template("discount_post.html")
 
 @app.route('/feed')
 def feed():
-    postList = get_all_posts()
-    return render_template("feed.html")
+    post_list = PostManager.get_all_posts()
+    return render_template("feed.html", posts=post_list)
+
+@app.route('dashboard')
+def dashboard():
+    categories = []
+    return render_template("dashboard.html", categories=categories)
 
 
 
