@@ -24,6 +24,7 @@ def name_search(name):
         for row in reader:
             if row[0] == name:
                 postList.append(??)
+    return postList
 
 def category_search(category):
     postList = []
@@ -32,3 +33,12 @@ def category_search(category):
         for row in reader:
             if row[4] == category:
                 postList.append(??)
+    return postList
+
+def get_all_posts():
+    postList = []
+    with open('something.csv') as csvfile:
+        reader = csv.reader(csvfile, delimiter ="?")
+        for row in reader:
+            postList.append(??)
+    return postList
