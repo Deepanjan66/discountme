@@ -1,12 +1,14 @@
 from abc import ABC, abstractmethod
+import csv
 from csv import DictReader, DictWriter
 import os
+from config import *
 
 TABLE_STRUCTURE = {
-        'user': ['id', 'name', 'location', 'password'],
-        'post': ['id', 'name', 'original_price', 'current_price', 'location'],
-        'post-user': ['post_id', 'uid']
-        }
+        USERS : ['id', 'name', 'location', 'password'],
+        POSTS : ['id', 'name', 'original_price', 'current_price', 'location', 'category'],
+        USER_POST : ['post_id', 'uid']
+}
 
 
 class DAO():
@@ -31,17 +33,22 @@ class csvDAO(DAO):
         self.root_path = root_path
 
     def read(self, table):
-        with open(os.path.join(self.root_path, 'table', table + '.csv'), 'r') as csv:
-            return  [ dict(entry) for entry in DictReader(csv) ]
+        with open(os.path.join(self.root_path, table), 'r') as csv_in:
+            return  [ dict(entry) for entry in DictReader(csv_in) ]
 
 
-    def write(self, table, payload):
-        with open(os.path.join(self.root_path, 'table', table + '.csv'), 'a') as csv:
-            writer = DictWriter(csv, TABLE_STRUCTURE[table])
-            if csv.tell() == 0:
+    def write(self, table, payload, mode='a'):
+        with open(os.path.join(self.root_path, table), mode) as csv_out:
+            """
+            writer = csv.writer(csv_out)
+            for row in payload:
+                writer.writerow(row)
+            """
+            print(TABLE_STRUCTURE[table])
+            writer = DictWriter(csv_out, TABLE_STRUCTURE[table])
+            if csv_out.tell() == 0:
                 writer.writeheader()
             writer.writerows(payload)
-
         '''
         # THIS IS A NAIVE VERSION
         # TODO: do replacing/updating when try to write duplicated entry
