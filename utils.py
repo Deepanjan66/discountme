@@ -48,6 +48,16 @@ class PostManager:
         print(data)
         return data
 
+    def get_post_by_id(id):
+        post_dict = next(filter(lambda u:int(u['id']) == id, dao.read(POSTS)))
+        return Discount_post(post_dict)
+
+    def get_posts_by_user(id):
+        user_posts = dao.read(USER_POST)
+        post_ids = [int(row['post_id']) for row in user_posts if int(row['uid']) == id]
+        post_objs = list(map(PostManager.get_post_by_id, post_ids))
+        return post_objs 
+
 class LocationManager:
     def get_latitudes(locs):
         all_lats = []
@@ -68,3 +78,7 @@ class LocationManager:
             all_lats.append(response)
             
         return all_lats
+
+class CategoryManager:
+    def get_categories_by_id(id):
+
