@@ -1,5 +1,3 @@
-
-
 from post import discount_post
 from routes import *
 import csv
