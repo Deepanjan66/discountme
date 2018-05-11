@@ -17,11 +17,11 @@ def dashboard():
     categories = []
     return render_template("dashboard.html", categories=categories)
 
-@app.route('/post')
+@app.route('/post', methods = ['POST', 'GET'])
 def post():
     if request.method == 'POST':
-        PostManager.add_post(dict(request.form))
-        return redirect(url_for('dashboard'))
+        PostManager.add_post(request.form.to_dict())
+        return redirect(url_for('feed'))
     return render_template('post.html')
 
 '''
