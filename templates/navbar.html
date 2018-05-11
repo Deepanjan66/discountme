@@ -1,11 +1,17 @@
 <header>
   <div class="navbar navbar-dark bg-dark box-shadow">
-    <div class="container d-flex justify-content-between">
-      <a href="/" class="navbar-brand d-flex align-items-center">
+    <div class="container" style="display: block">
+      <a href="/" class="navbar-brand">
         <strong>DiscountMe</strong>
       </a>
-      <button type="button" class="btn btn-primary">
-          Dashboard 
+      <button type="button" class="btn btn-dark float-right" onclick="location.href='{{url_for('explore')}}'">
+          Explore
+      </button>
+      <button type="button" class="btn btn-dark float-right" onclick="location.href='{{url_for('profile', id=1)}}'">
+          Profile
+      </button>
+      <button type="button" class="btn btn-dark float-right" onclick="location.href='{{url_for('dashboard')}}'">
+          Dashboard
       </button>
     </div>
   </div>
