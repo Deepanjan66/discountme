@@ -12,12 +12,13 @@ class discount_post():
         self._original = original
         self._discount = discount
         self._location = location
-    self get_name():
+
+    def get_name():
         return self._name
-    self get_original():
+    def get_original():
         return self._original
-    self get_discount():
+    def get_discount():
         return self._discount
-    self get_location():
+    def get_location():
         return self._location
     
