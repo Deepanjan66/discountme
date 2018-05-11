@@ -5,5 +5,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = "a"
 
 dao = csvDAO(app.root_path)
+UPLOAD_FOLDER = 'static/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
