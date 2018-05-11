@@ -5,11 +5,6 @@ from utils import *
 import requests
 import json
 
-@app.route('/')
-def discount_feed():
-    return render_template("map.html")
-
-
 @app.route('/discount_post', methods=["POST"])
 def discount_post():
     if request.method == 'POST':
@@ -17,6 +12,7 @@ def discount_post():
         return redirect(url_for('dashboard.html'))
     return render_template("discount_post.html")
 
+@app.route('/')
 @app.route('/feed')
 def feed():
     post_list = PostManager.get_all_posts()
@@ -29,6 +25,7 @@ def new_user():
         return redirect(url_for('dashboard'))
     return render_template("dashboard.html")
 
+@app.route('/explore')
 @app.route('/map')
 def show_map():
     return render_template('map.html')
@@ -53,23 +50,12 @@ def locations():
 
     return json.dumps(data)
 
-
-@app.route('/post', methods = ['POST', 'GET'])
-def post():
-    if request.method == 'POST':
-        PostManager.add_post(request.form.to_dict())
-        return redirect(url_for('feed'))
-    return render_template('post.html')
-
 @app.route('/profile/<id>')
 def dashboard(id):
     id = int(id)
     posts = PostManager.get_posts_by_user(id)
     return render_template("profile.html",username=UserManager.get_user_by_id(id).name, posts = posts)
 
-@app.route('/explore')
-def explore():
-    pass
 
 '''
 Serve static files

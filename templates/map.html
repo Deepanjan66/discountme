@@ -1,7 +1,8 @@
-<html>
-<head>
+{% extends 'base.html' %}
+{% block head %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-</head>
+{% endblock %}
+{% block content%}
 
 <script type="text/javascript">
 // setup some JSON to use
@@ -16,7 +17,7 @@ function doWork() {
               mapTypeId: google.maps.MapTypeId.ROADMAP
          };
          var size = parseInt(data['size']);
-         var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+         var map = new google.maps.Map(document.getElementById("map_canvas_asa"),myOptions);
          var marker, i;
 
          for (i = 0; i < size; i++) {
@@ -42,7 +43,5 @@ function doWork() {
         src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDg02uDO1ClnNq6h8nqx6Fx_nX8WPUog_s&callback=doWork" async>
 </script>
 <!--<body onload="initialize()">-->
-<body>
-   <div id="map_canvas" style="width:60%; height:60%"></div>
-</body>
-</html>
+<div id="map_canvas_asa" style="width:1500px; height:800px;"></div>
+{% endblock %}
