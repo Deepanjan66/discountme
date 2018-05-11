@@ -19,16 +19,28 @@ def feed():
     post_list = PostManager.get_all_posts()
     return render_template("feed.html", posts=post_list)
 
-@app.route('/dashboard')
-def dashboard():
-    categories = []
-    return render_template("dashboard.html", categories=categories)
-@app.route('/<id>/profile')
-def profile(id):
-    posts = PostManager.get_post_by_user(id)
-    render_template("profile.html",username = get_user_by_id(id),posts = posts)
+@app.route('/post', methods = ['POST', 'GET'])
+def post():
+    if request.method == 'POST':
+        PostManager.add_post(request.form.to_dict())
+        return redirect(url_for('feed'))
+    return render_template('post.html')
 
+@app.route('/profile/<id>')
+def dashboard(id):
+    id = int(id)
+    posts = PostManager.get_posts_by_user(id)
+    return render_template("profile.html",username=UserManager.get_user_by_id(id).name, posts = posts)
+@app.route('/search')
+def search():
+    if request.method == 'POST':
+        name = request.form["name"]
+        posts = PostManager.name_search(name)
+    return render_template('search.html',posts=posts)
 
+@app.route('/explore')
+def explore():
+    pass
 
 '''
 Serve static files
