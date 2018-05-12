@@ -1,22 +1,35 @@
 {% extends 'base.html' %}
+{% block head %}
+<style>
+  .bottom-three {
+     margin-bottom: 3cm;
+  }
+</style>
+
+ <!-- Custom styles for this template -->
+  <link href="cover.css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 
-<main role="main">
-
-   <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
-  </head>
-
-  <body class="text-center">
-
-      <main role="main" class="inner cover">
-        <h1 class="cover-heading">DiscountMe</h1>
-        <p class="lead">Explore Your Discount</p><br/>
-        <p class="lead">Support Local Business</p>
-        <p class="lead">
-          <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-        </p>
-      </main>
+  <main role="main" class="inner cover">
+    <center>
+    <h1 class="cover-heading">DiscountMe</h1>
+    </center>
+    <center>
+    <div class="bottom-three">
+      <p class="lead">Explore Your Discount</p>
+      <p class="lead">Support Local Business</p>
+    </div>
+    </center>
+    <center>
+    <div class="bottom-three">
+      <p class="lead">
+        <a href="#" class="btn btn-lg btn-secondary"onclick="location.href='{{url_for('feed')}}'">Learn more</a>
+      </p>
+    </div>
+    </center>
+  </main>
 {% endblock %}
 
 {% block scripts %}
