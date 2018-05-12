@@ -8,7 +8,7 @@ import json
 @app.route('/')
 @app.route('/feed', defaults={'category': 'all'})
 @app.route('/feed/<category>', )
-def feed(category):
+def feed(category='all'):
     post_list = PostManager.category_search(category)
     all_category = [entry.category for entry in PostManager.get_all_posts()]
     all_category = list(set(all_category))
@@ -19,7 +19,7 @@ def feed(category):
 @app.route('/post', methods = ['POST', 'GET'])
 def post():
     if request.method == 'POST':
-        PostManager.add_post(request.form.to_dict())
+        PostManager.add_post(request.form.to_dict(), request.files['file'])
         return redirect(url_for('feed'))
     return render_template('post.html')
 
@@ -64,6 +64,8 @@ def dashboard(id):
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     filename += ".jpg"
+    print(filename)
+    print(app.config['UPLOAD_FOLDER'])
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                            filename)
 
