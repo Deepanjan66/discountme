@@ -6,7 +6,7 @@ from config import *
 
 TABLE_STRUCTURE = {
         USERS : ['id', 'name', 'location', 'password'],
-        POSTS : ['id', 'name', 'original_price', 'current_price', 'location', 'category', 'unit', 'expiration'],
+        POSTS : ['id', 'name', 'original_price', 'current_price', 'location', 'category', 'unit', 'expiration', 'sharing'],
         USER_POST : ['uid', 'post_id']
 }
 
