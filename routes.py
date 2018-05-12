@@ -5,13 +5,6 @@ from utils import *
 import requests
 import json
 
-@app.route('/discount_post', methods=["POST"])
-def discount_post():
-    if request.method == 'POST':
-        PostManager.add_post(dict(request.form), file=request.files['file'])
-        return redirect(url_for('dashboard.html'))
-    return render_template("discount_post.html")
-
 @app.route('/')
 @app.route('/feed', defaults={'category': 'all'})
 @app.route('/feed/<category>', )
@@ -22,6 +15,13 @@ def feed(category):
     # print(post_list)
     return render_template("feed.html", posts=post_list, 
             all_category=all_category, curr_category=category)
+
+@app.route('/post', methods = ['POST', 'GET'])
+def post():
+    if request.method == 'POST':
+        PostManager.add_post(request.form.to_dict())
+        return redirect(url_for('feed'))
+    return render_template('post.html')
 
 @app.route('/new_user', methods=["POST"])
 def new_user():
