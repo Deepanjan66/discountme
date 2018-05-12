@@ -5,7 +5,7 @@ import os
 from config import *
 
 TABLE_STRUCTURE = {
-        USERS : ['id', 'name', 'location', 'password'],
+        USERS : ['id', 'name', 'location', 'password','email'],
         POSTS : ['id', 'name', 'original_price', 'current_price', 'location', 'category', 'unit', 'expiration'],
         USER_POST : ['uid', 'post_id']
 }

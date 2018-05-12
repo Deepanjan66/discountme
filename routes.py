@@ -13,6 +13,8 @@ def feed(category='all'):
     all_category = [entry.category for entry in PostManager.get_all_posts()]
     all_category = list(set(all_category))
     # print(post_list)
+
+    
     return render_template("feed.html", posts=post_list, 
             all_category=all_category, curr_category=category)
 
@@ -20,6 +22,19 @@ def feed(category='all'):
 def post():
     if request.method == 'POST':
         PostManager.add_post(request.form.to_dict(), request.files['file'])
+        rels = UserManager.get_users_categories()
+        print("Hello")
+
+        for r_id in rels:
+            print(r_id, rels[r_id])
+            if r_id not in rels:
+                continue
+            if request.form['category'] in rels[r_id]:
+                print("Hello 3")
+                EmailManager.send_email(UserManager.get_user_by_id(r_id).email,\
+                        "We found a new discount offer for you. {} is going at {}".format(request.form['name'], request.form['current_price']))
+                print("Hello4")
+
         return redirect(url_for('feed'))
     return render_template('post.html')
 
@@ -41,10 +56,10 @@ def locations():
     posts = PostManager.get_all_posts()
     locs = [post.location for post in posts]
     locs = LocationManager.get_latitudes(locs)
-    all_details = [(l, p.name) for l, p in zip(locs, posts)]
+    all_details = [(l, p.name, p.current_price) for l, p in zip(locs, posts)]
 
     for i, loc in enumerate(all_details):
-        data[i] = (loc[0]['lat'], loc[0]['lng'], loc[1])
+        data[i] = (loc[0]['lat'], loc[0]['lng'], loc[1], loc[2])
 
     send_url = 'http://freegeoip.net/json'
     r = requests.get(send_url)

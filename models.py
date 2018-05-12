@@ -9,6 +9,8 @@ class Discount_post():
         self.current_price = data_dict['current_price']
         self.location = data_dict['location']
         self.category = data_dict['category']
+        self.expiration = data_dict['expiration']
+        self.unit = data_dict['unit']
 
     def get_name(self):
         return self._name
@@ -35,3 +37,4 @@ class User():
         self.name = user_dict['name']
         self.location = user_dict['location']
         self.password = user_dict['password']
+        self.email = user_dict['email']
