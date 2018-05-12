@@ -4,6 +4,8 @@ from config import *
 import requests
 import os
 import facebook
+import smtplib
+from collections import defaultdict
 
 class UserManager:
     def add_user(user_form):
@@ -13,11 +15,24 @@ class UserManager:
         dao.write(USERS, [user_form])
 
     def get_user_by_id(id):
-        user_dict = next(filter(lambda u:int(u['id']) == id, dao.read(USERS)))
-        return User(user_dict)
+        all_users = dao.read(USERS)
+        for user in all_users:
+            if user['id'] == str(id):
+                return User(user)
+        return None
 
     def get_users():
         return [ User(user_dict) for user_dict in dao.read(USERS) ]
+
+    def get_users_categories():
+        data = dao.read(USER_CATEGORIES)
+        rels = defaultdict(list)
+        for rel in data:
+            if rel['category'] not in rel['user_id']:
+                rels[rel['user_id']].append(rel['category'])
+
+        return rels
+
 
 
 class PostManager:
@@ -92,6 +107,20 @@ class CategoryManager:
 class FacebookManager:
     def get_friends():
         return graph.get_connections(id='me', connection_name='friends')
+
+    def send_message(msg, audience_type):
+         graph.put_object(parent_object='me', connection_name=audience_type,
+                                   message=msg)
+class EmailManager:
+    def send_email(recipient, content):
+        print("Email")
+        server = smtplib.SMTP('smtp-mail.outlook.com', 587)
+        server.starttls()
+        server.login(email, password)
+
+        server.sendmail("z5110198@unsw.edu.au", recipient, content)
+        server.quit()
+
 
 
 
