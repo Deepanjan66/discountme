@@ -63,6 +63,11 @@ class PostManager:
         post_objs = list(map(PostManager.get_post_by_id, post_ids))
         return post_objs 
 
+    def get_all_categories():
+        all_category = [entry.category for entry in PostManager.get_all_posts()]
+        all_category = list(set(all_category))
+        return all_category
+
 class LocationManager:
     def get_latitudes(locs):
         all_lats = []
