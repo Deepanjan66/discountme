@@ -1,5 +1,19 @@
 id,name,original_price,current_price,location,category,unit,expiration
-0,Apple,100,50,Apple Sydney,Tech,hour,1
-1,Banana,100,50,Sydney,Fruit,hour,1
-2,Hahaha,100,1,Facebook sydney,Non-tech,hour,1
-3,Banana2,20,10,Sydney,Misc,day,1,false
+0,FBHackathon,220,20,"77 King St, Sydney NSW 2000, Australia",Tech,hour,2
+1,FBHackathon,220,20,"77 King St, Sydney NSW 2000, Australia",Tech,hour,2
+2,aasdf,212,12,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+3,asdf,22,2,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+4,wfsdf,233,3,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+5,asdfdsf,222,22,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+6,asdfadf,234,33,"77 King St, Sydney NSW 2000, Australia",Tech,day,1
+7,sadfad,122,2,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+8,asdf,23,3,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+9,adsfsadf,23,2,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+10,asdfasdf,2323,322,"77 King St, Sydney NSW 2000, Australia",Tech,hour,2
+11,asdfafsd,23,3,"77 King St, Sydney NSW 2000, Australia",Tech,day,2
+12,XD,22,1,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+13,XD,22,1,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+14,XD,22,1,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+15,XD,22,1,"77 King St, Sydney NSW 2000, Australia",Tech,hour,1
+16,blah,1,1,17 vivian st bellevue hill,Blah,day,1
+17,Something new,200,100,Facebook sydney,BlahBlah,day,1,false
