@@ -109,3 +109,4 @@ venv.bak/
 *.jpg
 *facebookenv*
 *.jpg
+config.py
