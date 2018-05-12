@@ -6,6 +6,9 @@ import requests
 import json
 
 @app.route('/')
+def home():
+    return render_template('index.html')
+
 @app.route('/feed', defaults={'category': 'all'})
 @app.route('/feed/<category>', )
 def feed(category='all'):
