@@ -3,6 +3,7 @@ from server import dao, app
 from config import *
 import requests
 import os
+import facebook
 
 class UserManager:
     def add_user(user_form):
@@ -87,4 +88,12 @@ class LocationManager:
 class CategoryManager:
     def get_categories_by_id(id):
         pass
+
+class FacebookManager:
+    def get_friends():
+        return graph.get_connections(id='me', connection_name='friends')
+
+
+
+
 
