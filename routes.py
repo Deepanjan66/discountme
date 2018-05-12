@@ -21,7 +21,8 @@ def post():
     if request.method == 'POST':
         PostManager.add_post(request.form.to_dict(), request.files['file'])
         return redirect(url_for('feed'))
-    return render_template('post.html')
+    return render_template('post.html', 
+            all_category=PostManager.get_all_categories())
 
 @app.route('/new_user', methods=["POST"])
 def new_user():
