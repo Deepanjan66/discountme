@@ -1,7 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Select friends</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <input type="text" id="serach_friend" class="form-control" placeholder="Search friends..." required autofocus>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            Friend 1 
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            Friend 2
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            Friend 3
+          </label>
+        </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Finish</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <div class="row">
-    
     <div style="margin: 50px auto 0" class="col-lg-8">
         
     {# <!-- Custom styles for this template --> #}
@@ -60,8 +104,12 @@
                Available to everyone
              </label>
              <input class="form-check-inline" type="radio" name="sharing" id="sharing" value="false">
-             <label class="form-check-label" for="sharing">
+             <label class="form-check-label" for="sharing" style="margin-right: 10px">
                  Only available to my friends
+             </label>
+             <input class="form-check-inline" type="radio" name="sharing" id="sharing" value="false" data-toggle="modal" data-target="#myModal">
+             <label class="form-check-label" for="sharing">
+                 Only to selected frineds
              </label>
             </div>
 
@@ -72,4 +120,9 @@
     </form>
 </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/jquery-slim.min.js"></script>
+<script src="/static/bootstrap.min.js"></script>
 {% endblock %}
