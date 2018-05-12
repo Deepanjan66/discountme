@@ -60,10 +60,10 @@ def locations():
     posts = PostManager.get_all_posts()
     locs = [post.location for post in posts]
     locs = LocationManager.get_latitudes(locs)
-    all_details = [(l, p.name) for l, p in zip(locs, posts)]
+    all_details = [(l, p.name, p.current_price) for l, p in zip(locs, posts)]
 
     for i, loc in enumerate(all_details):
-        data[i] = (loc[0]['lat'], loc[0]['lng'], loc[1])
+        data[i] = (loc[0]['lat'], loc[0]['lng'], loc[1], loc[2])
 
     send_url = 'http://freegeoip.net/json'
     r = requests.get(send_url)
