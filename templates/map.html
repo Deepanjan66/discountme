@@ -28,7 +28,7 @@ function doWork() {
 
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                return function () {
-                  infowindow.setContent(data[i][2]);
+                  infowindow.setContent(data[i][2] + " selling at $" + data[i][3]);
                   infowindow.open(map, marker);
                }
             })(marker, i));

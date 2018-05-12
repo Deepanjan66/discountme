@@ -118,7 +118,6 @@ class FacebookManager:
                                    message=msg)
 class EmailManager:
     def send_email(recipient, content):
-        print("Email")
         server = smtplib.SMTP('smtp-mail.outlook.com', 587)
         server.starttls()
         server.login(email, password)
