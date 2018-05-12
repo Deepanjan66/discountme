@@ -31,12 +31,12 @@ def dashboard(id):
     id = int(id)
     posts = PostManager.get_posts_by_user(id)
     return render_template("profile.html",username=UserManager.get_user_by_id(id).name, posts = posts)
-@app.route('/search')
+@app.route('/search', methods=['GET'])
 def search():
-    if request.method == 'POST':
-        name = request.form["name"]
-        posts = PostManager.name_search(name)
-    return render_template('search.html',posts=posts)
+    posts = []
+    name = request.args.get('search')
+    posts = PostManager.name_search(name)
+    return render_template('feed.html',posts=posts,search=name)
 
 @app.route('/explore')
 def explore():
