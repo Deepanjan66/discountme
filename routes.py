@@ -1,9 +1,10 @@
 from flask import *
 import csv
-from server import app
+from server import app, dao
 from utils import *
 import requests
 import json
+from config import *
 
 @app.route('/')
 def home():
@@ -33,14 +34,16 @@ def post():
             if r_id not in rels:
                 continue
             if request.form['category'] in rels[r_id]:
-                print("Hello 3")
+                # print("Hello 3")
                 EmailManager.send_email(UserManager.get_user_by_id(r_id).email,\
                         "We found a new discount offer for you. {} is going at {}".format(request.form['name'], request.form['current_price']))
-                print("Hello4")
+                # print("Hello4")
 
         return redirect(url_for('feed'))
+    friends = dao.read(FRIENDS)
     return render_template('post.html', 
-            all_category=PostManager.get_all_categories())
+            all_category=PostManager.get_all_categories(),
+            friends = friends)
 
 @app.route('/new_user', methods=["POST"])
 def new_user():
