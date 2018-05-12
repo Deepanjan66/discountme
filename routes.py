@@ -13,6 +13,8 @@ def feed(category='all'):
     all_category = [entry.category for entry in PostManager.get_all_posts()]
     all_category = list(set(all_category))
     # print(post_list)
+
+    
     return render_template("feed.html", posts=post_list, 
             all_category=all_category, curr_category=category)
 
@@ -20,6 +22,19 @@ def feed(category='all'):
 def post():
     if request.method == 'POST':
         PostManager.add_post(request.form.to_dict(), request.files['file'])
+        rels = UserManager.get_users_categories()
+        print("Hello")
+
+        for r_id in rels:
+            print(r_id, rels[r_id])
+            if r_id not in rels:
+                continue
+            if request.form['category'] in rels[r_id]:
+                print("Hello 3")
+                EmailManager.send_email(UserManager.get_user_by_id(r_id).email,\
+                        "We found a new discount offer for you. {} is going at {}".format(request.form['name'], request.form['current_price']))
+                print("Hello4")
+
         return redirect(url_for('feed'))
     return render_template('post.html')
 

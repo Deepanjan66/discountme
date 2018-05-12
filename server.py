@@ -1,5 +1,7 @@
 from flask import Flask
 from DAO import csvDAO
+import facebook
+import config
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "a"
