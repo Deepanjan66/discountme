@@ -1,3 +1,5 @@
 id,name,original_price,current_price,location,category,unit,expiration
 0,Chicken sqewers at local shop,9,3,"Bondi, Sydney",Food,hour,1,true
 1,Small buggers going out for free,7,0,"77 King St, Sydney NSW 2000, Australia",Food,hour,2,false
+2,MacBook Pro,2500,1500,Apple Sydney,Tech,day,1,true
+3,Fruit,10,2,Maroubra,Fruit,day,1,true

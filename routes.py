@@ -26,19 +26,6 @@ def feed(category='all'):
 def post():
     if request.method == 'POST':
         PostManager.add_post(request.form.to_dict(), request.files['file'])
-        rels = UserManager.get_users_categories()
-        print("Hello")
-
-        for r_id in rels:
-            print(r_id, rels[r_id])
-            if r_id not in rels:
-                continue
-            if request.form['category'] in rels[r_id]:
-                # print("Hello 3")
-                EmailManager.send_email(UserManager.get_user_by_id(r_id).email,\
-                        "We found a new discount offer for you. {} is going at {}".format(request.form['name'], request.form['current_price']))
-                # print("Hello4")
-
         return redirect(url_for('feed'))
     friends = dao.read(FRIENDS)
     return render_template('post.html', 
